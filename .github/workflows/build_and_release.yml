@@ -18,7 +18,7 @@ jobs:
           submodules: recursive
           fetch-depth: 0
           ref: main
-          token: ${{ secrets.PAT }}
+          #token: ${{ secrets.PAT }}
 
       - name: Update submodule to latest commit
         run: git submodule update --remote --merge
@@ -50,6 +50,7 @@ jobs:
       - name: Create Release and Upload PDF
         uses: softprops/action-gh-release@v1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           files: "src/${{ github.event.repository.name }}-${{ github.ref_name }}.pdf"
           name: "${{ github.ref_name }}: ${{ github.event.repository.name }}"
           body: ""
